@@ -85,6 +85,74 @@ const roomTypeOptions =[
   },
   
 ];
+const aminitiesOptions =[
+  {
+    value:"Wifi",
+    label:"Wifi",
+    icon: "Wifi,"
+  }, 
+  { value:"Kitchen", 
+  label:"kitchen", 
+  icon: "Kitchen"
+  },
+  {
+    value:" Ac",
+    label:" AC",
+    icon: "ac_unit,"
+  },
+  {
+    value:" Washing machine",
+    label:" Washing Machine",
+    icon: "local_laundary_service,"
+  },
+  {
+    value:" Tv",
+    label:" TV",
+    icon: "tv,"
+  },
+  {
+    value:" Pool",
+    label:" Pool",
+    icon: "pool,"
+  },
+  {
+    value:" Free Parking",
+    label:" Free Parking",
+    icon: "local_parking,"
+  },
+];
+
+//function to handle aminities
+const handleClearFilters = ( ) => {
+  setPriceRange({ min: 600, max:3000, });
+  setPropertyType("");
+  setRoomType("");
+  setAmenities([]);
+
+};
+
+//function to handle changes in amenities
+
+const handleAmenitiesChanges =(selectedAmenity) =>{
+  setAmenities((prevAmenities)=> prevAmenities.include(selectedAmenity)
+  ? prevAmenities.filter((item)=> item!== selectedAmenity)
+  :[...prevAmenities,selectedAmenity]
+  );
+};
+
+// function to handle changes in propertytype
+const handlePropertyTypeChanges = (selectedType) => {
+  setPropertyType((prevType) =>
+  prevType === selectedType ? "": selectedType
+  );
+};
+// function to handle changes in room type
+const handleRoomTypeChanges = (selectedType) => {
+  setRoomType((prevType) =>
+  prevType === selectedType ? "": selectedType
+  );
+};
+
   return (
     <>
 
