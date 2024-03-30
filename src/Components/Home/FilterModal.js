@@ -5,7 +5,7 @@ import "../../CSS/FilterModal.css";
 import "react-input-range/lib/css/index.css";
 import InputRange from "react-input-range";
 
-const FilterModal = ({selectedFilters, onFilterChange, onclose }) => {
+const FilterModal = ({selectedFilters, onFilterChange, onClose }) => {
   const [priceRange, setPriceRange] = useState({
     min: selectedFilters.priceRange?.min || 600,
     max: selectedFilters.priceRange?.max || 3000,
@@ -49,7 +49,7 @@ const handleFilterChange = () => {
   onFilterChange("propertyType", propertyType);
   onFilterChange("roomType", roomType);
   onFilterChange("amenities", amenities);
-  onclose();
+  onClose();
 };
 
 const propertyTypeOptions =[
@@ -141,7 +141,7 @@ const handleAmenitiesChanges =(selectedAmenity) =>{
 };
 
 // function to handle changes in propertytype
-const handlePropertyTypeChanges = (selectedType) => {
+const handlePropertyTypeChange = (selectedType) => {
   setPropertyType((prevType) =>
   prevType === selectedType ? "": selectedType
   );
@@ -155,6 +155,62 @@ const handleRoomTypeChanges = (selectedType) => {
 
   return (
     <>
+    <div className='modal-backdrop'>
+      <div className='modal-content'>
+        <h4>
+          Filter <hr/>
+        </h4>
+        {/*close button */}
+        <button className='close-button' onClick={onClose}>
+        <span>&times;</span>
+        </button>
+
+        {/* filter section */}
+        <div className='modal-filters-container'>
+          <div className='filter-section'>
+            <label>Price Range:</label>
+            <InputRange
+            minVlue={600}
+            maxValue={3000}
+            value={priceRange}
+            onChange={handlePriceRangeChange}
+            
+            />
+            <div className='range-input'>
+            <input
+            type='number'
+            value={priceRange.min}
+            onChange={handleMinInputChange}
+            />
+            <span>-</span>
+            <input
+            type="number"
+            value={priceRange.max}
+            onchange={handleMaxInputChange}
+            />
+            </div>
+
+          </div>
+
+          {/*Property type filter */}
+
+          <div className='filtersection'>
+            <label>Proprty Type:</label>
+            <div className='icon-box'>
+              {propertyTypeOptions.map((options) =>(
+                <div key={Option.value}
+                className={`selectable-box ${propertyType === options.value ? "selected" :"" }`}
+                onClick={() => handlePropertyTypeChange (options.value)}
+                >
+                  <span className='material-icons'>{options.icon}</span>
+                  <span>{options.label}</span>
+                  </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     </>
   )

@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <RouterProvider router= {router}/>
-     <h1 className='bg-red text-black text-4xl'>Ganeshay namah</h1>
+    
     </div>
   );
 }
